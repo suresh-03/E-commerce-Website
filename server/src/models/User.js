@@ -53,6 +53,10 @@ const UserSchema = new mongoose.Schema({
 UserSchema.virtual("password").set(function(password){
     this.hash_password = bcrypt.hashSync(password,10);
 });
+
+UserSchema.virtual("fullname").get(function(){
+    return `${this.firstname} ${this.lastname}`
+})
  
 
 // then comparing the given password is equal to the hash_password (signin)
