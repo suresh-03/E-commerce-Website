@@ -9,9 +9,9 @@ require("dotenv").config();
 //         message: "admin already exists!",
 //       });
 //     }
-  
+
 //     const { firstname, lastname, email, password} = req.body;
-  
+
 //     const _user = new User({
 //       firstname,
 //       lastname,
@@ -20,14 +20,13 @@ require("dotenv").config();
 //       username: Math.random().toString(),
 //       role:"admin"
 //     });
-  
+
 //     _user.save(
 //       res.status(201).json({
 //         message: "Successfully Registered!",
 //       })
 //     );
 //   };
-
 
 exports.signinAdmin = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
