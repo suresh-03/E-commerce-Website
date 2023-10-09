@@ -31,9 +31,13 @@ exports.signin = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) {
     if (user.authenticate(req.body.password) && user.role === "user") {
-      const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { _id: user._id, role: user.role },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "1h",
+        }
+      );
       const { _id, firstname, lastname, fullname, email, role } = user;
       return res.status(200).json({
         token,
@@ -45,5 +49,3 @@ exports.signin = async (req, res) => {
     message: "user not found! you have to register!",
   });
 };
-
-

@@ -5,7 +5,6 @@ const env = require("dotenv");
 
 env.config();
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,13 +16,12 @@ connectionDB();
 
 // importing user routes
 const UserRoutes = require("./routes/UserRoutes");
+const CategoryRoutes = require("./routes/CategoryRoutes");
 
 // using api as default
-app.use("/api",UserRoutes);
+app.use("/api", UserRoutes);
+app.use("/api", CategoryRoutes);
 
-app.listen(process.env.PORT_NO,() => {
-    console.log(`running in port ${process.env.PORT_NO}`);
+app.listen(process.env.PORT_NO, () => {
+  console.log(`running in port ${process.env.PORT_NO}`);
 });
-
-
-
