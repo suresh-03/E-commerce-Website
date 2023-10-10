@@ -1,6 +1,27 @@
 const Category = require("../models/Category");
 const slugify = require("slugify");
 
+function relatedCategory(categories, parentId = null) {
+  const categoryList = [];
+  let category;
+
+  if (parentId == null) {
+    category = categories.filter((cat) => cat.parentId == undefined);
+  } else {
+    category = categories.filter((cat) => cat.parentId == parentId);
+  }
+
+  for (let cate of category) {
+    categoryList.push({
+      _id: cate._id,
+      name: cate.name,
+      slug: cate.slug,
+      children: relatedCategory(categories, cate._id),
+    });
+  }
+  return categoryList;
+}
+
 exports.createCategory = (req, res) => {
   const categoryObj = {
     name: req.body.name,
@@ -21,12 +42,13 @@ exports.createCategory = (req, res) => {
 };
 
 exports.getCategories = async (req, res) => {
-  const cat = await Category.find()
+  await Category.find({})
     .exec()
     .then((categories) => {
-      res.status(200).json({ categories });
+      const categoryList = relatedCategory(categories);
+      return res.status(200).json({ categoryList });
     })
     .catch((error) => {
-      res.status(400).json({ error });
+      return res.status(400).json({ error });
     });
 };
