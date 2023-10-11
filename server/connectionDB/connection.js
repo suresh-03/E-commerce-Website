@@ -5,10 +5,10 @@ async function connectDB() {
   await mongoose
     .connect(process.env.MONGO_DB)
     .then(() => {
-      console.log("database connected");
+      console.log(`Database Connected at mongodb:${mongoose.connection.host}`);
     })
-    .catch((e) => {
-      console.log(e.name);
+    .catch((err) => {
+      console.log(err);
     });
 }
 

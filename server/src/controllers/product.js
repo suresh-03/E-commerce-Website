@@ -1,6 +1,6 @@
 const Product = require("../models/Product");
 const slugify = require("slugify");
 
-exports.addProduct = (req, res) => {
-  res.json({ message: "hello" });
+exports.createProduct = (req, res) => {
+  res.json({ file: req.files });
 };
