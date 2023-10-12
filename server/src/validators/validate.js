@@ -5,15 +5,15 @@ exports.validateSignupRequest = [
   check("lastname").notEmpty().withMessage("enter the lastname"),
   check("email").notEmpty().withMessage("email should not be empty"),
   check("password")
-    .isLength({ min: 8 })
+    .isLength({ min: 6 })
     .withMessage("password should be atleast 8 characters"),
 ];
 
 exports.validateSigninRequest = [
   check("email").notEmpty().withMessage("email should not be empty"),
-//   check("password")
-//     .isLength({ min: 8 })
-//     .withMessage("password should be atleast 8 characters"),
+  //   check("password")
+  //     .isLength({ min: 8 })
+  //     .withMessage("password should be atleast 8 characters"),
 ];
 
 exports.isRequestValidated = (req, res, next) => {

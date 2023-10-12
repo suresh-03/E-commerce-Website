@@ -18,11 +18,13 @@ connectionDB();
 const UserRoutes = require("./routes/UserRoutes");
 const CategoryRoutes = require("./routes/CategoryRoutes");
 const productRoutes = require("./routes/ProductRoutes");
+const CartRoutes = require("./routes/CartRoutes");
 
 // using api as default
 app.use("/api", UserRoutes);
 app.use("/api", CategoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", CartRoutes);
 
 app.listen(process.env.PORT_NO, () => {
   console.log(`running in port ${process.env.PORT_NO}`);
