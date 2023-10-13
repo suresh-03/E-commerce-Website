@@ -43,9 +43,11 @@ exports.signin = async (req, res) => {
         token,
         user: { _id, firstname, lastname, fullname, email, role },
       });
+    } else {
+      return res.status(400).json({ message: "Incorrect Password!" });
     }
   }
-  res.json({
+  return res.json({
     message: "user not found! you have to register!",
   });
 };
